@@ -15,9 +15,12 @@ namespace Grafica
             List<Pedidos> listaPedidos = new List<Pedidos>();
             int quantidadePedidos = 0;
 
+            // Verifica se existe o arquivo com o caminho passado.
             if (File.Exists(path))
             {
-                Console.WriteLine("znArquivo encontrado!");
+                Console.WriteLine("\nArquivo encontrado!");
+
+                // Procura o arquivo pelo caminho path e devolve em um array de string
                 lines = File.ReadAllLines(path);
 
                 Console.WriteLine($"Linhas encontradas: {lines.Length}");
