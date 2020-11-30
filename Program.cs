@@ -52,28 +52,6 @@ namespace Grafica
             {
                 Console.WriteLine("Arquivo não encontrado!");
             }
-
-
-            // int i = 0;
-
-            // foreach (string line in lines)
-            // {
-
-            //     if (i == 0)
-            //     {
-            //         int quantidade = Convert.ToInt32(line);
-            //     }
-            //     else
-            //     {
-            //         String[] campos = line.Split(';');
-
-            //         
-            //     }
-
-            //     i++;
-
-            // }
-
         }
     }
 }
