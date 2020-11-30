@@ -45,13 +45,17 @@ namespace Grafica
 
                 }
 
+
+                // Exibir a quantidade de itens da lista de pedidos já no padrão.
                 Console.WriteLine($"\nTamanho da lista de pedidos: {listaPedidos.Count}");
 
                 Console.WriteLine("\nExecutando a esteira...");
+                // Executa a esteira padrao passando a lista de pedidos e a quantidade
                 Esteira.Executar(quantidadePedidos, listaPedidos);
 
 
                 Console.WriteLine("\nExecutando a esteira FIFO...");
+                // Executa a esteira no modo fifo passando a lista de pedidos e a quantidade
                 Esteira.Fifo(quantidadePedidos, listaPedidos);
 
                 Console.WriteLine("\nFim da execução");
