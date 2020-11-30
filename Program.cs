@@ -43,7 +43,7 @@ namespace Grafica
                         // Console.WriteLine($"{campos[0]}, {campos[1]}, {campos[2]}, {campos[3]}");
 
                         // Cria a lista de pedidos
-                        listaPedidos.Add(new Pedidos(campos[0], Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3])));
+                        listaPedidos.Add(new Pedidos(campos[0], Int32.Parse(campos[1]), float.Parse(campos[2]), Int32.Parse(campos[3])));
                     }
 
                 }
