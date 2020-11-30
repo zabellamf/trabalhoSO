@@ -54,6 +54,8 @@ namespace Grafica
                 Console.WriteLine("\nExecutando a esteira FIFO...");
                 Esteira.Fifo(quantidadePedidos, listaPedidos);
 
+                Console.WriteLine("\nFim da execução");
+
             }
             else
             {
