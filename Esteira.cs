@@ -77,7 +77,7 @@ namespace Grafica
                     {
                         produtosAntesMeioDia++;
                     }
-                    if (pedido[index].Prazo > 0 && tempo > pedido[index].Prazo * 60)
+                    if (pedido[index].Prazo > 0 && pedido[index].Prazo > tempo)
                     {
                         foraPrazo++;
                     }
@@ -85,7 +85,7 @@ namespace Grafica
                 }
             }
 
-            Console.WriteLine($"Fora do Prazo: {foraPrazo} Produzidos: {quantidadeProduzida} Antes do meio dia: {produtosAntesMeioDia}");
+            Console.WriteLine($"Fora do Prazo: {foraPrazo}\n Produzidos: {quantidadeProduzida}\n Antes do meio dia: {produtosAntesMeioDia}");
         }
 
 
