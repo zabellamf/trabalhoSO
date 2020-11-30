@@ -55,32 +55,35 @@ namespace Grafica
 
             Console.WriteLine($"Fora do Prazo :{foraPrazo} Produzidos: {quantidadeProduzida} Antes do meio dia: {produtosAntesMeioDia}");
 
+        }
 
-            // 	public static void Fifo(int quantidade, List<Produto> produto)
-            // {
-            //     int quantidadeProduzida = 0, produtosAntesMeioDia = 0;
-            //     int foraPrazo = 0;
-            //     int tempo = 0;
-            //     for (int index = 0; index < produto.size(); index++)
-            //     {
-            //         produto.get(index).CalcularTempoProducao();
-            //         tempo += produto.get(index).TempoProducao;
-            //         if (!(tempo > TempoDia))
-            //         {
-            //             if (tempo <= TempoMeioDia)
-            //             {
-            //                 produtosAntesMeioDia++;
-            //             }
-            //             if (produto.get(index).Prazo > 0 && tempo > produto.get(index).Prazo * 60)
-            //             {
-            //                 foraPrazo++;
-            //             }
-            //             quantidadeProduzida++;
-            //         }
-            //     }
-            //     System.out.println("Fora do Prazo :" + foraPrazo + " Produzidos: " + quantidadeProduzida + " Antes do meio dia:" + produtosAntesMeioDia);
-            // }
-            //     }
+
+        public static void Fifo(int quantidade, List<Pedidos> pedido)
+        {
+            int quantidadeProduzida = 0, produtosAntesMeioDia = 0;
+            int foraPrazo = 0;
+            double tempo = 0;
+
+            for (int index = 0; index < pedido.Count; index++)
+            {
+                pedido[index].CalcularTempoProducao();
+                tempo += pedido[index].TempoProducao;
+
+                if (!(tempo > TempoDia))
+                {
+                    if (tempo <= TempoMeioDia)
+                    {
+                        produtosAntesMeioDia++;
+                    }
+                    if (pedido[index].Prazo > 0 && tempo > pedido[index].Prazo * 60)
+                    {
+                        foraPrazo++;
+                    }
+                    quantidadeProduzida++;
+                }
+            }
+
+            Console.WriteLine($"Fora do Prazo: {foraPrazo} Produzidos: {quantidadeProduzida} Antes do meio dia: {produtosAntesMeioDia}");
         }
 
         public static int CompararPedidos(Pedidos pedido1, Pedidos pedido2)
