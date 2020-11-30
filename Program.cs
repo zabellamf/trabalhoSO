@@ -17,7 +17,7 @@ namespace Grafica
 
             if (File.Exists(path))
             {
-                Console.WriteLine("Arquivo encontrado!");
+                Console.WriteLine("znArquivo encontrado!");
                 lines = File.ReadAllLines(path);
 
                 Console.WriteLine($"Linhas encontradas: {lines.Length}");
@@ -45,10 +45,14 @@ namespace Grafica
 
                 }
 
-                Console.WriteLine($"Tamanho da lista de pedidos: {listaPedidos.Count}");
+                Console.WriteLine($"\nTamanho da lista de pedidos: {listaPedidos.Count}");
 
-                Console.WriteLine("Executando a esteira...");
+                Console.WriteLine("\nExecutando a esteira...");
                 Esteira.Executar(quantidadePedidos, listaPedidos);
+
+
+                Console.WriteLine("\nExecutando a esteira FIFO...");
+                Esteira.Fifo(quantidadePedidos, listaPedidos);
 
             }
             else
