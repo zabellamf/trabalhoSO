@@ -11,6 +11,8 @@ namespace Grafica
             // string path = @"C:\Users\amanda.carvalho\source\repos\Grafica\DadosSo.txt";
             string path = @"C:\DadosSo.txt";
             string[] lines;
+
+            List<Pedidos> listarPedidos = new List<Pedidos>();
             int quantidadePedidos = 0;
 
             if (File.Exists(path))
@@ -18,13 +20,16 @@ namespace Grafica
                 Console.WriteLine("Arquivo encontrado!");
                 lines = File.ReadAllLines(path);
 
+                Console.WriteLine($"Linhas encontradas: {lines.Length}");
+
                 for (int i = 0; i < lines.Length; i++)
                 {
-                    Console.WriteLine(lines[i]);
+                    // Elemento por linha
+                    // Console.WriteLine(lines[i]);
 
                     string[] campos = lines[i].Split(";");
 
-                    // Pega a quantidade de items importados
+                    // Pega a quantidade de items importados, sendo que a primeira linha informa a quantidade de registros
                     if (campos.Length == 1)
                     {
                         quantidadePedidos = Int32.Parse(campos[0]);
@@ -32,10 +37,15 @@ namespace Grafica
                     else
                     {
                         // Mostra todos os elementos da lista particionando os valores
-                        Console.WriteLine($"{campos[0]}, {campos[1]}, {campos[2]}, {campos[3]}");
+                        // Console.WriteLine($"{campos[0]}, {campos[1]}, {campos[2]}, {campos[3]}");
+
+                        // Cria a lista de pedidos
+                        listarPedidos.Add(new Pedidos(campos[0], Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3])));
                     }
 
                 }
+
+                Console.WriteLine($"Tamanho da lista de pedidos: {listarPedidos.Count}");
 
             }
             else
@@ -43,7 +53,6 @@ namespace Grafica
                 Console.WriteLine("Arquivo não encontrado!");
             }
 
-            List<Pedidos> listarPedidos = new List<Pedidos>();
 
             // int i = 0;
 
@@ -58,8 +67,7 @@ namespace Grafica
             //     {
             //         String[] campos = line.Split(';');
 
-            //         listarPedidos.Add(new Pedidos(campos[0], Convert.ToInt32(campos[1]), Convert.ToInt32(campos[2]),
-            //                Convert.ToInt32(campos[3])));
+            //         
             //     }
 
             //     i++;

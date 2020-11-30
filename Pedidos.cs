@@ -6,59 +6,60 @@ namespace Grafica
     class Pedidos
     {
         private int TempoPorPacote = 1;
-        string cliente1;
+        string Cliente;
         int FlagMeioDia = 0;
-        float total, preco;
-        int prazo1;
+        float Total, Preco;
+        int Prazo;
+
         public double TempoProducao;
         public Pedidos(String cliente, int totalDePaginas, float precoPagina, int prazo)
         {
-            cliente1 = cliente;
-            total = totalDePaginas;
-            preco = precoPagina;
-            prazo1 = prazo;
+            Cliente = cliente;
+            Total = totalDePaginas;
+            Preco = precoPagina;
+            Prazo = prazo;
         }
 
         public String Getcliente()
         {
-            return this.cliente1;
+            return this.Cliente;
         }
 
         public float GetTotal()
         {
-            return this.total;
+            return this.Total;
         }
 
         public int GetPrazo()
         {
-            return this.prazo1;
+            return this.Prazo;
         }
 
         public float GetPreco()
         {
-            return this.preco;
+            return this.Preco;
         }
         public void SetNome(String cliente1)
         {
-            this.cliente1 = cliente1;
+            this.Cliente = cliente1;
         }
         public void SetTotal(int total)
         {
-            this.total = total;
+            this.Total = total;
         }
         public void Setpreco(float preco)
         {
-            this.preco = preco;
+            this.Preco = preco;
         }
-        public void SetPrazo(int prazo1)
+        public void SetPrazo(int prazo)
         {
-            this.prazo1 = prazo1;
+            this.Prazo = prazo;
         }
 
         public void CalcularTempo()
         {
             double tempoDecorrido = 0.15;
-            float totalPedido = total;
+            float totalPedido = Total;
             float volumeTotal = this.GetTotal() * this.GetPreco();
             float produtosPacote = 80 / this.GetTotal();
 
@@ -80,7 +81,7 @@ namespace Grafica
                     tempoDecorrido = +5.5;
                 }
             }
-            
+
             this.TempoProducao = tempoDecorrido;
 
             //  int volumeTotal = this.GetVolume() * this.GetNumeroProdutos();
