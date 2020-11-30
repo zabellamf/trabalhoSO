@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Grafica
 {
@@ -84,6 +85,42 @@ namespace Grafica
             }
 
             Console.WriteLine($"Fora do Prazo: {foraPrazo} Produzidos: {quantidadeProduzida} Antes do meio dia: {produtosAntesMeioDia}");
+        }
+
+
+        public static void ExecutarThread(int quantidade, List<Pedidos> pedidos)
+        {
+            // Criando a Thread inicial, toda execucao é na Threade inicial
+            Console.WriteLine("Thread principal iniciada");
+            Thread.CurrentThread.Name = "Principal - ";
+
+            // Crio duas listas particionando os pedidos em duas listas de pedidos.
+            List<Pedidos> listaPedidos1 = new List<Pedidos>();
+            List<Pedidos> listaPedidos2 = new List<Pedidos>();
+
+            // Quero a lista principal inserindo na listaPedidos1 e listaPedidos2
+            for (int i = 0; i < pedidos.Count; i++)
+            {
+                // Considero impa ou par para dividir
+                if (i % 2 == 0)
+                {
+                    listaPedidos1.Add(pedidos[i]);
+                }
+                else
+                {
+                    listaPedidos2.Add(pedidos[i]);
+                }
+            }
+
+            // Inicio uma segunda Thread, passando o metodo que ela vai executar sendo a lista 2
+            Thread t1 = new Thread(() => Executar(listaPedidos2.Count, listaPedidos2));
+            t1.Name = "Secundária - ";
+
+            // Inicio a segunda thread
+            t1.Start();
+
+            // Chamo na thread principal a lista 1
+            Executar(listaPedidos1.Count, listaPedidos1);
         }
 
         public static int CompararPedidos(Pedidos pedido1, Pedidos pedido2)

@@ -61,6 +61,10 @@ namespace Grafica
                 // Executa a esteira no modo fifo passando a lista de pedidos e a quantidade
                 Esteira.Fifo(quantidadePedidos, listaPedidos);
 
+                Console.WriteLine("\nExecutando a esteira com THREADS...");
+                // Executa a esteira com threads passando a lista de pedidos e a quantidade
+                Esteira.ExecutarThread(quantidadePedidos, listaPedidos);
+
                 Console.WriteLine("\nFim da execução");
 
             }
