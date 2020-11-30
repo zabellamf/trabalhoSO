@@ -9,7 +9,7 @@ namespace Grafica
         static void Main(string[] args)
         {
             // string path = @"C:\Users\amanda.carvalho\source\repos\Grafica\DadosSo.txt";
-            string path = @"C:\DadosSo.txt";
+            string path = @"C:\www\trabalhoSO\dadosGrafica2020.txt";
             string[] lines;
 
             List<Pedidos> listaPedidos = new List<Pedidos>();
