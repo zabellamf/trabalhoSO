@@ -12,7 +12,7 @@ namespace Grafica
             string path = @"C:\DadosSo.txt";
             string[] lines;
 
-            List<Pedidos> listarPedidos = new List<Pedidos>();
+            List<Pedidos> listaPedidos = new List<Pedidos>();
             int quantidadePedidos = 0;
 
             if (File.Exists(path))
@@ -40,12 +40,15 @@ namespace Grafica
                         // Console.WriteLine($"{campos[0]}, {campos[1]}, {campos[2]}, {campos[3]}");
 
                         // Cria a lista de pedidos
-                        listarPedidos.Add(new Pedidos(campos[0], Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3])));
+                        listaPedidos.Add(new Pedidos(campos[0], Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3])));
                     }
 
                 }
 
-                Console.WriteLine($"Tamanho da lista de pedidos: {listarPedidos.Count}");
+                Console.WriteLine($"Tamanho da lista de pedidos: {listaPedidos.Count}");
+
+                Console.WriteLine("Executando a esteira...");
+                Esteira.Executar(quantidadePedidos, listaPedidos);
 
             }
             else

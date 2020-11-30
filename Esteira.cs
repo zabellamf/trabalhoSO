@@ -14,83 +14,46 @@ namespace Grafica
         public static void Executar(int quantidade, List<Pedidos> pedidos)
         {
 
-            // for (int index = 0; index < pedidos.size(); index++)
-            // {
-            //     if (pedidos(index).Prazo > 0 && pedidos.get(index).Prazo * 60 <= TempoMeioDia)
-            //     {
-            //         pedidos.get(index).FlagMeioDia = 1;
-            //         pedidos.get(index).CalcularTempoProducao();
-            //     }
-            //     else
-            //     {
-            //         pedidos.get(index).CalcularTempoProducao();
-            //     }
-            // }
+            for (int index = 0; index < pedidos.Count; index++)
+            {
+                if (pedidos[index].Prazo > 0 && pedidos[index].Prazo * 60 <= TempoMeioDia)
+                {
+                    pedidos[index].FlagMeioDia = 1;
+                    pedidos[index].CalcularTempoProducao();
+                }
+                else
+                {
+                    pedidos[index].CalcularTempoProducao();
+                }
+            }
 
-            //             Collections.sort(pedidos, new IComparable<Pedidos>()
-            //             {
+            pedidos.Sort(CompararPedidos);
 
 
-            //                 public int compare(Pedidos o1, Pedidos o2)
-            //             {
-            //                 if (o1.GetPrazo != 0 && o2.Prazo != 0)
-            //                 {
-            //                     if (o1.Prazo < o2.Prazo)
-            //                     {
-            //                         return -1;
-            //                     }
-            //                     if (o1.Prazo > o2.Prazo)
-            //                     {
-            //                         return 1;
-            //                     }
-            //                     else return 0;
-            //                 }
-            //                 if (o1.Prazo != 0 && o2.Prazo == 0)
-            //                 {
-            //                     return -1;
-            //                 }
-            //                 if (o1.Prazo == 0 && o2.Prazo != 0)
-            //                 {
-            //                     return 1;
-            //                 }
+            int quantidadeProduzida = 0;
+            int produtosAntesMeioDia = 0;
+            int foraPrazo = 0;
+            double tempo = 0;
 
-            //                 if (o1.Prazo == o2.Prazo)
-            //                 {
-            //                     if (o1.TempoProducao > o2.TempoProducao)
-            //                     {
-            //                         return 1;
-            //                     }
-            //                     if (o1.TempoProducao < o2.TempoProducao)
-            //                     {
-            //                         return -1;
-            //                     }
-            //                     else return 0;
-            //                 }
-            //                 return 0;
-            //             }
-            //         });
+            for (int index = 0; index < pedidos.Count; index++)
+            {
+                tempo += pedidos[index].TempoProducao;
 
-            // 		 int quantidadeProduzida = 0, produtosAntesMeioDia = 0;
-            //         int foraPrazo = 0;
-            //         int tempo = 0; 
-            // 			for(int index = 0; index<produto.size() ; index ++ ) 
-            // 			{
-            // 				tempo += produto.get(index).TempoProducao;
-            // 				if(!(tempo > TempoDia)) {
-            // 					if(tempo <= TempoMeioDia) 
-            // 					{
-            // 						produtosAntesMeioDia ++;
-            // 					}
-            // 				if(produto.get(index).Prazo > 0 && tempo > produto.get(index).Prazo* 60)
-            // 				{
-            // 					foraPrazo ++;
-            // 				}
-            // quantidadeProduzida++;
-            // 				}
-            // 			}
-            // 			System.out.println("Fora do Prazo :" + foraPrazo + " Produzidos: " + quantidadeProduzida + " Antes do meio dia:" + produtosAntesMeioDia);
-            // 		}
+                if (!(tempo > TempoDia))
+                {
+                    if (tempo <= TempoMeioDia)
+                    {
+                        produtosAntesMeioDia++;
+                    }
+                    if (pedidos[index].Prazo > 0 && tempo > pedidos[index].Prazo * 60)
+                    {
+                        foraPrazo++;
+                    }
+                    quantidadeProduzida++;
+                }
+            }
 
+            Console.WriteLine($"Fora do Prazo :{foraPrazo} Produzidos: {quantidadeProduzida} Antes do meio dia: {produtosAntesMeioDia}");
 
 
             // 	public static void Fifo(int quantidade, List<Produto> produto)
@@ -119,5 +82,44 @@ namespace Grafica
             // }
             //     }
         }
+
+        public static int CompararPedidos(Pedidos pedido1, Pedidos pedido2)
+        {
+            if (pedido1.Prazo != 0 && pedido2.Prazo != 0)
+            {
+                if (pedido1.Prazo < pedido2.Prazo)
+                {
+                    return -1;
+                }
+                if (pedido1.Prazo > pedido2.Prazo)
+                {
+                    return 1;
+                }
+                else return 0;
+            }
+            if (pedido1.Prazo != 0 && pedido2.Prazo == 0)
+            {
+                return -1;
+            }
+            if (pedido1.Prazo == 0 && pedido2.Prazo != 0)
+            {
+                return 1;
+            }
+
+            if (pedido1.Prazo == pedido2.Prazo)
+            {
+                if (pedido1.TempoProducao > pedido2.TempoProducao)
+                {
+                    return 1;
+                }
+                if (pedido1.TempoProducao < pedido2.TempoProducao)
+                {
+                    return -1;
+                }
+                else return 0;
+            }
+            return 0;
+        }
+
     }
 }

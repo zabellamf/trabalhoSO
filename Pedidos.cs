@@ -5,11 +5,11 @@ namespace Grafica
 {
     class Pedidos
     {
-        private int TempoPorPacote = 1;
-        string Cliente;
-        int FlagMeioDia = 0;
-        float Total, Preco;
-        int Prazo;
+        public int TempoPorPacote = 1;
+        public string Cliente;
+        public int FlagMeioDia = 0;
+        public float Total, Preco;
+        public int Prazo;
 
         public double TempoProducao;
         public Pedidos(String cliente, int totalDePaginas, float precoPagina, int prazo)
@@ -20,25 +20,6 @@ namespace Grafica
             Prazo = prazo;
         }
 
-        public String Getcliente()
-        {
-            return this.Cliente;
-        }
-
-        public float GetTotal()
-        {
-            return this.Total;
-        }
-
-        public int GetPrazo()
-        {
-            return this.Prazo;
-        }
-
-        public float GetPreco()
-        {
-            return this.Preco;
-        }
         public void SetNome(String cliente1)
         {
             this.Cliente = cliente1;
@@ -56,12 +37,12 @@ namespace Grafica
             this.Prazo = prazo;
         }
 
-        public void CalcularTempo()
+        public void CalcularTempoProducao()
         {
             double tempoDecorrido = 0.15;
             float totalPedido = Total;
-            float volumeTotal = this.GetTotal() * this.GetPreco();
-            float produtosPacote = 80 / this.GetTotal();
+            float volumeTotal = this.Total * this.Preco;
+            float produtosPacote = 80 / this.Total;
 
             if (volumeTotal <= 80)
             {
