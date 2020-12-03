@@ -9,7 +9,7 @@ namespace Grafica
         static void Main(string[] args)
         {
             // string path = @"C:\Users\amanda.carvalho\source\repos\Grafica\DadosSo.txt";
-            string path = @"C:\DadosSo.txt";
+            string path = @"C:\DadosSo2.txt";
             string[] lines;
 
             List<Pedidos> listaPedidos = new List<Pedidos>();
@@ -43,7 +43,7 @@ namespace Grafica
                         // Console.WriteLine($"{campos[0]}, {campos[1]}, {campos[2]}, {campos[3]}");
 
                         // Cria a lista de pedidos
-                        listaPedidos.Add(new Pedidos(campos[0], Int32.Parse(campos[1]), Int32.Parse(campos[2]), Int32.Parse(campos[3])));
+                        listaPedidos.Add(new Pedidos(campos[0], Int32.Parse(campos[1]), float.Parse(campos[2]), Int32.Parse(campos[3]), Int32.Parse(campos[4])));
                     }
 
                 }
@@ -54,8 +54,7 @@ namespace Grafica
 
                 Console.WriteLine("\nExecutando a esteira...");
                 // Executa a esteira padrao passando a lista de pedidos e a quantidade
-                Esteira.Executar(quantidadePedidos, listaPedidos);
-
+                Esteira.Executar(quantidadePedidos, listaPedidos, true);
 
                 Console.WriteLine("\nExecutando a esteira FIFO...");
                 // Executa a esteira no modo fifo passando a lista de pedidos e a quantidade

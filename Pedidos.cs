@@ -11,13 +11,16 @@ namespace Grafica
         public float Total, Preco;
         public int Prazo;
 
+        public int TipoPapel;
+
         public double TempoProducao;
-        public Pedidos(String cliente, int totalDePaginas, float precoPagina, int prazo)
+        public Pedidos(String cliente, int totalDePaginas, float precoPagina, int prazo, int tipoPapel)
         {
             Cliente = cliente;
             Total = totalDePaginas;
             Preco = precoPagina;
             Prazo = prazo;
+            TipoPapel = tipoPapel;
         }
 
         public void SetNome(String cliente1)
@@ -35,6 +38,11 @@ namespace Grafica
         public void SetPrazo(int prazo)
         {
             this.Prazo = prazo;
+        }
+
+        public void setTipoPapel(int tipoPapel)
+        {
+            this.TipoPapel = tipoPapel;
         }
 
         public void CalcularTempoProducao()

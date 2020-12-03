@@ -12,24 +12,29 @@ namespace Grafica
         private static float tempoAtualAntesMeioDia = 0;
         private static float tempoAtualDepoisMeioDia = 0;
 
-        public static void Executar(int quantidade, List<Pedidos> pedidos)
+        public static void Executar(int quantidade, List<Pedidos> pedidos, bool precisaOrdenacao = false)
         {
 
-            for (int index = 0; index < pedidos.Count; index++)
+            if (precisaOrdenacao)
             {
-                if (pedidos[index].Prazo > 0 && pedidos[index].Prazo * 60 <= TempoMeioDia)
+                for (int index = 0; index < pedidos.Count; index++)
                 {
-                    pedidos[index].FlagMeioDia = 1;
-                    pedidos[index].CalcularTempoProducao();
+                    if (pedidos[index].Prazo > 0 && pedidos[index].Prazo * 60 <= TempoMeioDia)
+                    {
+                        pedidos[index].FlagMeioDia = 1;
+                        pedidos[index].CalcularTempoProducao();
+                    }
+                    else
+                    {
+                        pedidos[index].CalcularTempoProducao();
+                    }
                 }
-                else
-                {
-                    pedidos[index].CalcularTempoProducao();
-                }
+
+                pedidos.Sort(CompararPedidos);
             }
 
-            pedidos.Sort(CompararPedidos);
-
+            // A ideia foi ordenar por tipo de papel com isso vamos conseguir aprovaitar para nao precisar trocar o tipo de papel
+            pedidos.Sort(OrdenarTipoDePapel);
 
             int quantidadeProduzida = 0;
             int produtosAntesMeioDia = 0;
@@ -94,6 +99,22 @@ namespace Grafica
             Console.WriteLine("Thread principal iniciada");
             Thread.CurrentThread.Name = "Principal - ";
 
+            for (int index = 0; index < pedidos.Count; index++)
+            {
+                if (pedidos[index].Prazo > 0 && pedidos[index].Prazo * 60 <= TempoMeioDia)
+                {
+                    pedidos[index].FlagMeioDia = 1;
+                    pedidos[index].CalcularTempoProducao();
+                }
+                else
+                {
+                    pedidos[index].CalcularTempoProducao();
+                }
+            }
+
+            // Ordenando os pedidos para nao ter problema com a Thread
+            pedidos.Sort(CompararPedidos);
+
             // Crio duas listas particionando os pedidos em duas listas de pedidos.
             List<Pedidos> listaPedidos1 = new List<Pedidos>();
             List<Pedidos> listaPedidos2 = new List<Pedidos>();
@@ -113,14 +134,30 @@ namespace Grafica
             }
 
             // Inicio uma segunda Thread, passando o metodo que ela vai executar sendo a lista 2
-            Thread t1 = new Thread(() => Executar(listaPedidos2.Count, listaPedidos2));
+            Thread t1 = new Thread(() => Executar(listaPedidos2.Count, listaPedidos2, false));
             t1.Name = "Secundária - ";
 
             // Inicio a segunda thread
             t1.Start();
 
             // Chamo na thread principal a lista 1
-            Executar(listaPedidos1.Count, listaPedidos1);
+            Executar(listaPedidos1.Count, listaPedidos1, false);
+        }
+
+        public static int OrdenarTipoDePapel(Pedidos pedido1, Pedidos pedido2) {
+            if (pedido1.TipoPapel == pedido2.TipoPapel) {
+                return 0;
+            }
+
+            if (pedido1.TipoPapel > pedido2.TipoPapel) {
+                return 1;
+            }
+
+            if (pedido1.TipoPapel < pedido2.TipoPapel) {
+                return -1;
+            }
+
+            return 0;
         }
 
         public static int CompararPedidos(Pedidos pedido1, Pedidos pedido2)
