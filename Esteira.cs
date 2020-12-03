@@ -51,15 +51,16 @@ namespace Grafica
                     {
                         produtosAntesMeioDia++;
                     }
-                    if (pedidos[index].Prazo > 0 && tempo > pedidos[index].Prazo * 60)
+                    if (pedidos[index].Prazo > 0 && pedidos[index].Prazo > tempo )
                     {
                         foraPrazo++;
                     }
                     quantidadeProduzida++;
                 }
+  
             }
 
-            Console.WriteLine($"Fora do Prazo :{foraPrazo} Produzidos: {quantidadeProduzida} Antes do meio dia: {produtosAntesMeioDia}");
+            Console.WriteLine($"Fora do Prazo :{foraPrazo}\n Produzidos: {quantidadeProduzida}\n Antes do meio dia: {produtosAntesMeioDia}");
 
         }
 
@@ -81,7 +82,7 @@ namespace Grafica
                     {
                         produtosAntesMeioDia++;
                     }
-                    if (pedido[index].Prazo > 0 && tempo > pedido[index].Prazo * 60)
+                    if (pedido[index].Prazo > 0 && pedido[index].Prazo > tempo)
                     {
                         foraPrazo++;
                     }
@@ -89,7 +90,7 @@ namespace Grafica
                 }
             }
 
-            Console.WriteLine($"Fora do Prazo: {foraPrazo} Produzidos: {quantidadeProduzida} Antes do meio dia: {produtosAntesMeioDia}");
+            Console.WriteLine($"Fora do Prazo: {foraPrazo}\n Produzidos: {quantidadeProduzida}\n Antes do meio dia: {produtosAntesMeioDia}");
         }
 
 
